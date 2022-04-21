@@ -15,7 +15,7 @@ import time
 # return a dictionary with country name as key and the GDP and population data in a list as value
 def get_data():
     page = input('What page of data do you want?')
-
+    #edit
     format = 'JSON'
     indicator_gdp = 'NY.GDP.MKTP.CD'
     per_page = 25

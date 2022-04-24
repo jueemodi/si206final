@@ -121,8 +121,8 @@ def main():
     calculate_gdp_per_capita('calculations.csv', cur, conn)
 
     # uncomment one of these to make a scatter plot, at the end, when all wanted data is in the database
-    make_graph_highest_gdp(conn, cur)
-    # make_graph_lowest_gdp(conn, cur)
+    make_graph_highest_gdp(cur)
+    # make_graph_lowest_gdp(cur)
 
 if __name__ == "__main__":
     main()

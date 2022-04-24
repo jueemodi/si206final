@@ -4,18 +4,13 @@ import sys
 import os
 import matplotlib
 import sqlite3
-import unittest
-import csv
 import matplotlib.pyplot as plt
-import pprint
-import time
-
 
 # get 25 or less country's GDP and popualtion data in 2020 from the world bank api, 
 # return a dictionary with country name as key and the GDP and population data in a list as value
 def get_data():
-    page = input('What page of data do you want?')
-
+    page = input('What page of data from the World Bank API do you want? data starts from page 3')
+    
     format = 'JSON'
     indicator_gdp = 'NY.GDP.MKTP.CD'
     per_page = 25
@@ -54,7 +49,6 @@ def setUpDatabase(db_name):
     return cur, conn
 
 def create_country(data, cur, conn):
-    
     # create the GDP table
     print('creating GDP table')
     cur.execute('CREATE TABLE IF NOT EXISTS GDP (id INTEGER PRIMARY KEY, name TEXT UNIQUE, gdp NUMBER, popu INTEGER)')
@@ -79,14 +73,12 @@ def calculate_gdp_per_capita(filename, cur, conn):
             f.write(str(person_gdp[index][1]))
             f.write('\n')
 
-
-def make_graph_highest_gdp(conn, cur):  
+def make_graph_highest_gdp(cur):  
     cur.execute('SELECT name, gdp/popu FROM GDP')
     person_gdp = cur.fetchall()
 
     # sort the list of tuples
     person_gdp.sort(key = lambda x:x[1], reverse = True)
-    #print(person_gdp)
 
     country, gdp = zip(*person_gdp)
     country = country[:5]
@@ -95,16 +87,15 @@ def make_graph_highest_gdp(conn, cur):
     plt.xlabel('countries with the highest GDP per capita')
     plt.ylabel('USD $')
 
-    plt.scatter(country, gdp)
+    plt.scatter(country, gdp, c='coral')
     plt.show()
 
-def make_graph_lowest_gdp(conn, cur):
+def make_graph_lowest_gdp(cur):
     cur.execute('SELECT name, gdp/popu FROM GDP')
     person_gdp = cur.fetchall()
 
     # sort the list of tuples
     person_gdp.sort(key = lambda x:x[1])
-    print(person_gdp)
 
     country, gdp = zip(*person_gdp)
     country = country[:5]
@@ -113,19 +104,20 @@ def make_graph_lowest_gdp(conn, cur):
     plt.xlabel('countries with the highest GDP per capita')
     plt.ylabel('USD $')
 
-    plt.scatter(country, gdp)
+    plt.scatter(country, gdp, c='lightblue')
     plt.show()
 
     
 def main():
     data = get_data()
-    cur, conn = setUpDatabase('test.db')
+    # change this to 'country'
+    cur, conn = setUpDatabase('countries.db')
     create_country(data, cur, conn)
     calculate_gdp_per_capita('calculations.csv', cur, conn)
 
     # uncomment one of these to make a scatter plot, at the end, when all wanted data is in the database
-    make_graph_highest_gdp(conn, cur)
-    # make_graph_lowest_gdp(conn, cur)
+    # make_graph_highest_gdp(cur)
+    # make_graph_lowest_gdp(cur)
 
 if __name__ == "__main__":
     main()

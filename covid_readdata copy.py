@@ -1,5 +1,6 @@
 from audioop import avg
 import sqlite3
+from turtle import color
 import requests
 import json
 import os
@@ -75,7 +76,7 @@ def visual(file):
     y_pos = np.arange(len(objects))
     performance = [avg_tests, avg_cases]
 
-    plt.bar(y_pos, performance, align='center', alpha=0.5)
+    plt.bar(y_pos, performance, align='center', alpha=0.5, color = "red")
     plt.xticks(y_pos, objects)
     plt.ylabel('Averages')
     plt.title('Average Cases & Tests Per Million for All Countries')

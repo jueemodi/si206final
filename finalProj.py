@@ -15,9 +15,9 @@ def get_data():
     #Grenada (GD), Haiti (HT), Jamaica (JM), Kiribati (KI), Liechtenstein(LI), Malawi (MW), Maldives(MV), Mauritius(MU), Maldova (MD), Monaco (MC), Montegengro (ME)
     #namibia (NA), Nauru (NR), Oman (OM), Palau(PW), Panama (PA), Paraguay(PY), Samoa (WS), Seychelles(SC), Singapore (SG), Somalia (SO), Suriname(SR), Syria (SY), Tonga (TO), Tunisia(TN), Tuvalu(TV), Uruguay(UY), Vanuatu(VU), Yemen(YE)
     result_list = []
-    for c in country_list:
+    for country in country_list:
     # update params _dict
-        params_dict['country_id'] = c
+        params_dict['country_id'] = country
         req_c = requests.get(base_url, params = params_dict)
         countries = json.loads(req_c.text)
         result_list.append(countries)

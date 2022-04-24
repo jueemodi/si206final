@@ -6,8 +6,6 @@ import matplotlib
 import sqlite3
 import matplotlib.pyplot as plt
 
-
-
 # get 25 or less country's GDP and popualtion data in 2020 from the world bank api, 
 # return a dictionary with country name as key and the GDP and population data in a list as value
 def get_data():
@@ -89,7 +87,7 @@ def make_graph_highest_gdp(cur):
     plt.xlabel('countries with the highest GDP per capita')
     plt.ylabel('USD $')
 
-    plt.scatter(country, gdp)
+    plt.scatter(country, gdp, c='coral')
     plt.show()
 
 def make_graph_lowest_gdp(cur):
@@ -106,7 +104,7 @@ def make_graph_lowest_gdp(cur):
     plt.xlabel('countries with the highest GDP per capita')
     plt.ylabel('USD $')
 
-    plt.scatter(country, gdp)
+    plt.scatter(country, gdp, c='lightblue')
     plt.show()
 
     

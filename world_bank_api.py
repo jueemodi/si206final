@@ -4,12 +4,7 @@ import sys
 import os
 import matplotlib
 import sqlite3
-import unittest
-import csv
 import matplotlib.pyplot as plt
-import pprint
-import time
-
 
 # get 25 or less country's GDP and popualtion data in 2020 from the world bank api, 
 # return a dictionary with country name as key and the GDP and population data in a list as value
@@ -92,7 +87,7 @@ def make_graph_highest_gdp(cur):
     plt.xlabel('countries with the highest GDP per capita')
     plt.ylabel('USD $')
 
-    plt.scatter(country, gdp)
+    plt.scatter(country, gdp, c='coral')
     plt.show()
 
 def make_graph_lowest_gdp(cur):
@@ -109,19 +104,19 @@ def make_graph_lowest_gdp(cur):
     plt.xlabel('countries with the highest GDP per capita')
     plt.ylabel('USD $')
 
-    plt.scatter(country, gdp)
+    plt.scatter(country, gdp, c='lightblue')
     plt.show()
 
     
 def main():
     data = get_data()
     # change this to 'country'
-    cur, conn = setUpDatabase('test.db')
+    cur, conn = setUpDatabase('countries.db')
     create_country(data, cur, conn)
     calculate_gdp_per_capita('calculations.csv', cur, conn)
 
     # uncomment one of these to make a scatter plot, at the end, when all wanted data is in the database
-    make_graph_highest_gdp(cur)
+    # make_graph_highest_gdp(cur)
     # make_graph_lowest_gdp(cur)
 
 if __name__ == "__main__":

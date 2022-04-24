@@ -125,6 +125,8 @@ def createCountryTable(countries, cur, conn): #creates a table of countries and 
             cont_id = 5
         elif continent == "Antarctica":
             cont_id = 6
+        else:
+            cont_id=10
         
         
 

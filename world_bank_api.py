@@ -14,7 +14,7 @@ import time
 # get 25 or less country's GDP and popualtion data in 2020 from the world bank api, 
 # return a dictionary with country name as key and the GDP and population data in a list as value
 def get_data():
-    page = input('What page of data do you want?')
+    page = input('What page of data from the World Bank API do you want?')
     
     format = 'JSON'
     indicator_gdp = 'NY.GDP.MKTP.CD'
@@ -54,7 +54,6 @@ def setUpDatabase(db_name):
     return cur, conn
 
 def create_country(data, cur, conn):
-    
     # create the GDP table
     print('creating GDP table')
     cur.execute('CREATE TABLE IF NOT EXISTS GDP (id INTEGER PRIMARY KEY, name TEXT UNIQUE, gdp NUMBER, popu INTEGER)')
@@ -79,14 +78,12 @@ def calculate_gdp_per_capita(filename, cur, conn):
             f.write(str(person_gdp[index][1]))
             f.write('\n')
 
-
-def make_graph_highest_gdp(conn, cur):  
+def make_graph_highest_gdp(cur):  
     cur.execute('SELECT name, gdp/popu FROM GDP')
     person_gdp = cur.fetchall()
 
     # sort the list of tuples
     person_gdp.sort(key = lambda x:x[1], reverse = True)
-    #print(person_gdp)
 
     country, gdp = zip(*person_gdp)
     country = country[:5]
@@ -98,13 +95,12 @@ def make_graph_highest_gdp(conn, cur):
     plt.scatter(country, gdp)
     plt.show()
 
-def make_graph_lowest_gdp(conn, cur):
+def make_graph_lowest_gdp(cur):
     cur.execute('SELECT name, gdp/popu FROM GDP')
     person_gdp = cur.fetchall()
 
     # sort the list of tuples
     person_gdp.sort(key = lambda x:x[1])
-    print(person_gdp)
 
     country, gdp = zip(*person_gdp)
     country = country[:5]
@@ -119,6 +115,7 @@ def make_graph_lowest_gdp(conn, cur):
     
 def main():
     data = get_data()
+    # change this to 'country'
     cur, conn = setUpDatabase('test.db')
     create_country(data, cur, conn)
     calculate_gdp_per_capita('calculations.csv', cur, conn)

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # get 25 or less country's GDP and popualtion data in 2020 from the world bank api, 
 # return a dictionary with country name as key and the GDP and population data in a list as value
 def get_data():
-    page = input('What page of data from the World Bank API do you want?')
+    page = input('What page of data from the World Bank API do you want? data starts from page 3')
     
     format = 'JSON'
     indicator_gdp = 'NY.GDP.MKTP.CD'

@@ -122,7 +122,7 @@ def graph2(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_name)
     cur = conn.cursor()
-    cur.execute('SELECT pm25_ave FROM Aqi2020 WHERE name = "United States of America"')
+    cur.execute('SELECT pm25_ave FROM Aqi2020 WHERE name = "United States of America')
     us_data = cur.fetchone()[0]
     
     global_pm25 = calculate_averages(db_name)[0] 

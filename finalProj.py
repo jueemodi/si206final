@@ -135,8 +135,8 @@ def main():
     country_dict = get_data('countries.db')
     setUpDatabase('countries.db', country_dict)
     calculate_averages('countries.db')
-    graphs('countries.db')
-    graph2('countries.db')
+    # graphs('countries.db')
+    # graph2('countries.db')
 
 
 if __name__ == "__main__":

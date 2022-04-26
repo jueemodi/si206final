@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # get 25 or less country's GDP and popualtion data in 2020 from the world bank api, 
 # return a dictionary with country name as key and the GDP and population data in a list as value
 def get_data():
-    page = input('What page of data from the World Bank API do you want? data starts from page 3')
+    page = input('What page of data from the World Bank API do you want? (data starts from page 3)')
     
     format = 'JSON'
     indicator_gdp = 'NY.GDP.MKTP.CD'
@@ -51,7 +51,7 @@ def setUpDatabase(db_name):
 def create_country(data, cur, conn):
     # create the GDP table
     print('creating GDP table')
-    cur.execute('CREATE TABLE IF NOT EXISTS GDP (id INTEGER PRIMARY KEY, name TEXT UNIQUE, gdp NUMBER, popu INTEGER)')
+    cur.execute('CREATE TABLE IF NOT EXISTS GDP (name TEXT UNIQUE, gdp NUMBER, popu INTEGER)')
     conn.commit()
     
     for country_name in data.keys():
@@ -113,7 +113,7 @@ def main():
     # change this to 'country'
     cur, conn = setUpDatabase('countries.db')
     create_country(data, cur, conn)
-    calculate_gdp_per_capita('calculations.csv', cur, conn)
+    calculate_gdp_per_capita('GDP_calc.csv', cur, conn)
 
     # uncomment one of these to make a scatter plot, at the end, when all wanted data is in the database
     # make_graph_highest_gdp(cur)

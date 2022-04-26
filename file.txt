@@ -1,0 +1,6 @@
+Avg Deaths Per Mill:
+1198.616
+Avg Cases Per Mill:
+141931.68
+Avg Deaths Per Mill in Europe:
+2273.3125

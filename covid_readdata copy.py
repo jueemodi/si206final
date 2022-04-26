@@ -86,6 +86,6 @@ def visual(file):
 
 def main():
     calculate("file.txt")
-    visual("file.txt")
+    #visual("file.txt")
 
 main()

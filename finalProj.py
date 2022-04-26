@@ -67,7 +67,7 @@ def setUpDatabase(db_name, country_dict):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_name)
     cur = conn.cursor()
-    cur.execute('CREATE TABLE IF NOT EXISTS Aqi2020 (name TEXT, pm25_ave FLOAT, pm10_ave FLOAT, no2_ave FLOAT, so2_ave FLOAT, co_ave FLOAT)')
+   # cur.execute('CREATE TABLE IF NOT EXISTS Aqi2020 (name TEXT, pm25_ave FLOAT, pm10_ave FLOAT, no2_ave FLOAT, so2_ave FLOAT, co_ave FLOAT)')
     
     for name in country_dict: 
         inner = country_dict[name]
@@ -99,7 +99,7 @@ def calculate_averages(db_name):
     with open(full_path, 'w') as fname:
         fname.write("Avg Global PM2.5:\n")
         fname.write(str(global_pm25))
-        fname.write("Avg Global PM10:\n")
+        fname.write("\n Avg Global PM10:\n")
         fname.write(str(global_pm10))
         
     #open and read the file after the appending:

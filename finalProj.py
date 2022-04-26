@@ -38,14 +38,13 @@ def get_data(db_name):
         req_c = requests.get(base_url, params = params_dict)
         countries = json.loads(req_c.text)
         result_list.append(countries)
-    #request call 
     
-    # loop over the data to find the dictionary you want data['results'] and save to dict 
+   
     
     country_dict = {}
     for country_data in result_list: 
         results = country_data['results']
-        for data in results: # Could loop through the country list, find the first instance of that name in the response, then start a while name == *name of outerloop variable* from there. Keep the four flags and the continue check I made
+        for data in results: 
             country_name = data['subtitle']
             if country_name not in country_dict: 
                 country_dict[country_name] = {}
@@ -67,7 +66,6 @@ def setUpDatabase(db_name, country_dict):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_name)
     cur = conn.cursor()
-   # cur.execute('CREATE TABLE IF NOT EXISTS Aqi2020 (name TEXT, pm25_ave FLOAT, pm10_ave FLOAT, no2_ave FLOAT, so2_ave FLOAT, co_ave FLOAT)')
     
     for name in country_dict: 
         inner = country_dict[name]
@@ -102,8 +100,6 @@ def calculate_averages(db_name):
         fname.write("\n Avg Global PM10:\n")
         fname.write(str(global_pm10))
         
-    #open and read the file after the appending:
-
     return global_pm25,global_pm10 
 
 def graphs(db_name):
@@ -139,10 +135,8 @@ def main():
     country_dict = get_data('countries.db')
     setUpDatabase('countries.db', country_dict)
     calculate_averages('countries.db')
-
-    # uncomment graphs to see them
-    # graphs('countries.db')
-    # graph2('countries.db')
+    graphs('countries.db')
+    graph2('countries.db')
 
 
 if __name__ == "__main__":

@@ -113,7 +113,7 @@ def main():
     # change this to 'country'
     cur, conn = setUpDatabase('countries.db')
     create_country(data, cur, conn)
-    calculate_gdp_per_capita('calculations.csv', cur, conn)
+    calculate_gdp_per_capita('GDP_calc.csv', cur, conn)
 
     # uncomment one of these to make a scatter plot, at the end, when all wanted data is in the database
     # make_graph_highest_gdp(cur)
